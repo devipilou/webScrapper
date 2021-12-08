@@ -86,11 +86,11 @@ app.get('/api/', async (req, res) => {
     // an array of products
     // average price
     // the amount of products
-    const dedicatedData = await scrapeData(dedicatedUrl, '.productList-container .productList', '.productList-details', '.productList-title', '.productList-price');
+    const dedicatedData = await scrapeData(dedicatedUrl, '.stickyLogo-text','.productList-container .productList', '.productList-details', '.productList-title', '.productList-price');
 
     // ORGANIC BASICS
     const organicBasicsUrl = 'https://organicbasics.com/collections/all-womens-products?filter=sweaters';
-    const organicBasicsData = await scrapeData(organicBasicsUrl, '.product-grid-item-container[data-tags*=Sweater]', '.product__grid--text-container', 'a', '.product-price')
+    const organicBasicsData = await scrapeData(organicBasicsUrl, '#Logo','.product-grid-item-container[data-tags*=Sweater]', '.product__grid--text-container', 'a', '.product-price')
     return res.send({
         dedicatedData,
         organicBasicsData
@@ -101,3 +101,5 @@ app.get('/api/', async (req, res) => {
 app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, '/index.html'));
 });
+
+app.use(express.static('public'));
